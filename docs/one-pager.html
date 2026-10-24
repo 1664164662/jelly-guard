@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>罗迪 · 果冻防线 · 项目一页纸</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #e9e5da; color: #14161a; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page {
+      width: 210mm; min-height: 297mm; margin: 0 auto; padding: 11mm 12mm 8mm;
+      background: #f2efe6; position: relative; overflow: hidden;
+    }
+    .page::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 5mm;
+      background: linear-gradient(90deg, #14161a 0 58%, #46d9ac 58% 82%, #ff6b8a 82% 100%);
+    }
+    header { display: flex; align-items: flex-end; justify-content: space-between; gap: 10mm; padding-bottom: 4mm; border-bottom: 1px solid rgba(20,22,26,.22); }
+    .name { font-size: 22pt; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
+    .name span { color: #0f9f78; }
+    .role { margin-top: 2mm; font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.5pt; letter-spacing: .12em; color: #555b5e; }
+    .contact { text-align: right; font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.5pt; line-height: 1.8; color: #444a4c; }
+    .contact b { color: #14161a; }
+    .hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; margin: 5mm 0 3mm; }
+    .kicker { font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.2pt; letter-spacing: .16em; color: #0f9f78; }
+    h1 { margin: 1.2mm 0 0; font-size: 24pt; line-height: 1.04; letter-spacing: -.05em; }
+    h1 em { font-style: normal; color: #0f9f78; }
+    .hero p { margin: 0; width: 64mm; font-size: 7pt; line-height: 1.75; color: #4f5556; }
+    .grid { display: grid; grid-template-columns: 1fr 60mm; gap: 7mm; margin-top: 4mm; }
+    h2 { margin: 4.5mm 0 2mm; font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.4pt; letter-spacing: .13em; color: #0f9f78; display: flex; align-items: center; gap: 2mm; }
+    h2::after { content: ""; height: 1px; flex: 1; background: rgba(20,22,26,.15); }
+    p, li { font-size: 7.1pt; line-height: 1.65; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2mm; }
+    .metric { padding: 3mm 3mm 2.5mm; border: 1px solid rgba(20,22,26,.13); border-radius: 2mm; background: rgba(255,255,255,.42); }
+    .metric b { display: block; font-size: 13.5pt; letter-spacing: -.04em; line-height: 1; color: #0f9f78; white-space: nowrap; }
+    .metric b span { display: inline; font-size: 7pt; }
+    .metric > span { display: block; margin-top: 1.4mm; font-size: 6.2pt; color: #555b5e; line-height: 1.45; }
+    .flow { display: flex; align-items: center; gap: 1mm; padding: 3mm 3.2mm; border-radius: 2mm; background: #14161a; color: #f2efe6; font-family: "Cascadia Mono", Consolas, monospace; font-size: 5.9pt; letter-spacing: .02em; }
+    .flow i { color: #46d9ac; font-style: normal; }
+    .flow span { white-space: nowrap; }
+    .flow small { display: block; margin-top: 1mm; color: #8f9694; font-size: 5pt; letter-spacing: .04em; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+    ul { margin: 0; padding-left: 3.2mm; }
+    li { margin-bottom: 1.4mm; padding-left: .5mm; }
+    li::marker { color: #0f9f78; }
+    .jd { width: 100%; border-collapse: collapse; font-size: 6.3pt; line-height: 1.55; }
+    .jd td { border-top: 1px solid rgba(20,22,26,.12); padding: 1.7mm 1mm; vertical-align: top; }
+    .jd td:first-child { width: 28mm; font-weight: 700; color: #0f9f78; }
+    .side { display: flex; flex-direction: column; gap: 3mm; }
+    .shot { border: 1mm solid #14161a; border-radius: 5mm; overflow: hidden; background: #070a1c; box-shadow: 0 5mm 12mm rgba(20,22,26,.15); }
+    .shot img { width: 100%; height: 76mm; object-fit: cover; object-position: center top; display: block; }
+    .caption { margin-top: 1.5mm; font-family: "Cascadia Mono", Consolas, monospace; font-size: 5.4pt; color: #6a706f; letter-spacing: .04em; }
+    .box { padding: 3mm 3.2mm; border: 1px solid rgba(20,22,26,.13); border-radius: 2mm; background: rgba(255,255,255,.4); }
+    .box h3 { margin: 0 0 1.5mm; font-family: "Cascadia Mono", Consolas, monospace; font-size: 5.8pt; letter-spacing: .1em; color: #555b5e; }
+    .box p { margin: 0; font-size: 6.3pt; line-height: 1.6; }
+    .box a, .box span { font-family: "Cascadia Mono", Consolas, monospace; font-size: 5.7pt; line-height: 1.7; color: #14161a; word-break: break-all; }
+    .box a { display: block; text-decoration: none; border-bottom: 1px solid rgba(15,159,120,.35); }
+    .tag { display: inline-block; padding: .7mm 1.5mm; margin: 0 1mm 1mm 0; border-radius: 9mm; background: #dfefe8; font-family: "Cascadia Mono", Consolas, monospace; font-size: 5.2pt; color: #176e57; }
+    .boundary { margin-top: 3mm; padding-top: 2mm; border-top: 1px solid rgba(20,22,26,.15); font-size: 5.7pt; line-height: 1.65; color: #6a706f; }
+    .lessons { margin-top: 6mm; }
+    .lesson-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; }
+    .lesson { padding: 2.5mm 3mm; border: 1px solid rgba(20,22,26,.12); border-radius: 2mm; background: rgba(255,255,255,.38); }
+    .lesson b { display: block; font-size: 7pt; color: #14161a; }
+    .lesson p { margin: 1mm 0 1.3mm; font-size: 6pt; line-height: 1.55; color: #555b5e; }
+    .lesson span { font-family: "Cascadia Mono", Consolas, monospace; font-size: 5.2pt; color: #0f9f78; }
+    .quote { margin-top: 2.5mm; padding: 2.6mm 3mm; border-left: 1.2mm solid #46d9ac; background: rgba(255,255,255,.38); font-size: 7pt; line-height: 1.65; }
+    footer { position: absolute; left: 12mm; right: 12mm; bottom: 5mm; display: flex; justify-content: space-between; font-family: "Cascadia Mono", Consolas, monospace; font-size: 5pt; letter-spacing: .06em; color: #8a908e; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="name">罗迪 <span>/ LUO DI</span></div>
+        <div class="role">计算机科学与技术本科 · 2026 届 · 武汉 · 求职：AI 试玩 / H5 游戏开发</div>
+      </div>
+      <div class="contact">
+        <b>1664164662@qq.com</b><br>
+        电话 / 微信：18627815975<br>
+        作品集：<span style="color:#0f9f78">[部署后填写]</span>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div>
+        <div class="kicker">PLAYABLE AD CASE STUDY · 2026</div>
+        <h1>果冻防线<br><em>30 秒 H5 试玩广告</em></h1>
+      </div>
+      <p>一次拖拽学会合成，30 秒完成教学、三波压力、Boss 与下载决策；同时把 AI 变体、单文件构建、埋点和自动化 QA 接成一条可复用的生产线。</p>
+    </div>
+
+    <div class="grid">
+      <main>
+        <h2>三个可验收的结果</h2>
+        <div class="metrics">
+          <div class="metric"><b>30s</b><span>完整试玩闭环<br>首次合成 2–4 秒</span></div>
+          <div class="metric"><b>119.6<span style="font-size:8pt"> KB</span></b><span>单文件 raw<br>gzip 31.0 KB · 0 外部请求</span></div>
+          <div class="metric"><b>5/5</b><span>CDP 冒烟<br>18/18 静态验收</span></div>
+        </div>
+
+        <h2>30 秒节奏</h2>
+        <div class="flow">
+          <span>0–3s Hook<small>情绪 + 按钮</small></span><i>→</i>
+          <span>3–10s 教学<small>一次拖拽</small></span><i>→</i>
+          <span>10–22s 压力<small>三波 + 空投</small></span><i>→</i>
+          <span>22–30s 高潮<small>Boss + 糖爆</small></span><i>→</i>
+          <span>END<small>结算 + CTA</small></span>
+        </div>
+
+        <h2>我做了什么</h2>
+        <div class="cols">
+          <ul>
+            <li><b>玩法：</b>合成 / 交换 / 自动索敌 / 糖爆 / 三波 / Boss；用虚线路径 + 同色高亮 + 6.2 秒兜底把首合压到几秒内。</li>
+            <li><b>工程：</b>原生 JS + Canvas 2D；精灵预渲染、粒子池、固定时间步、DPR 自适应；单文件构建。</li>
+          </ul>
+          <ul>
+            <li><b>AI 流水线：</b>LLM 只生成主题 / 文案 / 难度 JSON；Node 校验颜色、字数、Boss 时间；失败 fallback；3 套可 A/B 变体。</li>
+            <li><b>QA：</b>Chrome CDP 覆盖开始、合成、糖爆、失败重开 / 胜利、CTA；构建报告输出尺寸 / gzip / SHA。</li>
+          </ul>
+        </div>
+
+        <h2>对应岗位要求</h2>
+        <table class="jd">
+          <tr><td>H5 试玩 / SOP</td><td>30 秒闭环、教学、End Card、3 变体；完整 SOP 与 QA 清单</td></tr>
+          <tr><td>逻辑 / 性能</td><td>同轨优先 + 跨轨兜底、固定时间步、DPR / 粒子降级、结算停绘</td></tr>
+          <tr><td>AI 开发经验</td><td>schema 约束生成、fallback、prompt/response 留档、4 套提示词</td></tr>
+          <tr><td>游戏体验</td><td>合成塔防 + 对三消 / 跑酷的品类取舍；MRAID / ExitApi / playableSDK 桥</td></tr>
+        </table>
+
+        <div class="quote">“试玩广告不是把游戏做小，是把「想继续玩」压缩进几十秒。”</div>
+        <div class="boundary">个人求职作品，独立完成（AI 辅助），与冰川网络无隶属关系；应用名、评分、下载按钮为虚构演示素材；无真实投放数据，不声称 CTR / IPM / 用户量。</div>
+      </main>
+
+      <aside class="side">
+        <div>
+          <div class="shot"><img src="../assets/showcase/boss.png" alt="果冻防线 Boss 关卡截图"></div>
+          <div class="caption">LIVE BUILD · 390 × 844 · DPR 2</div>
+        </div>
+        <div class="box">
+          <h3>LINKS</h3>
+          <a href="[部署后填写]">可玩 Demo / 作品集</a>
+          <a href="[GitHub / Gitee]">源码与文档</a>
+          <a href="[部署后填写]/build-report.json">构建报告</a>
+        </div>
+        <div class="box">
+          <h3>STACK</h3>
+          <span class="tag">Vanilla JS</span><span class="tag">Canvas 2D</span><span class="tag">Node.js</span>
+          <span class="tag">JSON Schema</span><span class="tag">Chrome CDP</span><span class="tag">MRAID</span>
+          <span class="tag">AI 变体</span><span class="tag">性能优化</span>
+        </div>
+        <div class="box">
+          <h3>30-SECOND PITCH</h3>
+          <p>“我按 30 秒内完成一次合成、一次清场、一次下载决策的目标做了这个试玩，并把 AI 变体、单文件构建、埋点和自动化测试接进了同一条流水线。它现在能跑、能测、能复现。”</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="lessons">
+      <h2>三个真实修过的 bug</h2>
+      <div class="lesson-grid">
+        <div class="lesson">
+          <b>01 · 全合成后漏穿</b>
+          <p>炮台只打自己这一列，玩家把资源合到 Lv.5 后其他列直接失守。</p>
+          <span>同轨优先 + 跨轨兜底</span>
+        </div>
+        <div class="lesson">
+          <b>02 · 结算页掉到 20fps</b>
+          <p>End Card 的 backdrop-filter 叠在持续重绘的 Canvas 上。</p>
+          <span>停 Canvas + 静态背景</span>
+        </div>
+        <div class="lesson">
+          <b>03 · 首合发生在 12 秒后</b>
+          <p>只有文字提示，没有空间指引，玩家不知道拖哪里。</p>
+          <span>路径 + 高亮 + 6.2 秒兜底</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>罗迪 · 果冻防线 · JELLY GUARD</span>
+      <span>PLAYABLE AD / AI-ASSISTED PIPELINE</span>
+      <span>2026.10</span>
+    </footer>
+  </div>
+</body>
+</html>

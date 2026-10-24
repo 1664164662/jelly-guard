@@ -1,0 +1,46 @@
+{
+  "project": "jelly-guard",
+  "title": "果冻防线 · 30s H5 playable ad",
+  "version": "1.0.0",
+  "builtAt": "2026-10-24T07:07:48.915Z",
+  "playable": {
+    "file": "play/index.html",
+    "shareFile": "jelly-guard-playable.html",
+    "build": "v1.0.0+7d102d65",
+    "rawBytes": 122474,
+    "gzipBytes": 31739,
+    "sha256": "a5a7caefa980117efbf113280abcacf8bed758e6ce9e63ae1db566290896bada",
+    "sourceHash": "7d102d65"
+  },
+  "budgets": {
+    "rawBytes": 153600,
+    "gzipBytes": 51200
+  },
+  "checks": {
+    "singleFile": true,
+    "externalResourceRefs": 0,
+    "underRawBudget": true,
+    "underGzipBudget": true,
+    "variantCount": 3
+  },
+  "variants": [
+    {
+      "id": "mint",
+      "label": "薄荷实验室",
+      "source": "handcrafted",
+      "accent": "#62f5c5"
+    },
+    {
+      "id": "berry",
+      "label": "莓莓风暴",
+      "source": "handcrafted",
+      "accent": "#ff8db6"
+    },
+    {
+      "id": "sunset",
+      "label": "日落汽水",
+      "source": "ai-assisted",
+      "accent": "#ffc857"
+    }
+  ]
+}

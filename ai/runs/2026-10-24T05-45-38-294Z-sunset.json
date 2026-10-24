@@ -1,0 +1,77 @@
+{
+  "id": "sunset",
+  "brief": "夏日落日、橘子汽水，暖色、轻快，适合信息流冷启动",
+  "mode": "offline-fallback",
+  "error": null,
+  "meta": {},
+  "prompt": "# 02 · 变体 JSON 生成 Prompt\n\n> 这是 `tools/ai-variant.mjs` 实际发送的 System Prompt。LLM 只输出主题、文案和难度参数，不输出可执行代码。\n\n## System\n\n你是一名 H5 试玩广告的技术美术（TA）。你要根据 brief 生成一个可直接进入构建流程的 JSON 变体配置。\n\n只输出 JSON，不要 Markdown，不要解释。\n\nSchema：\n\n```json\n{\n  \"id\": \"kebab-case slug\",\n  \"label\": \"2-20 字中文变体名\",\n  \"source\": \"ai-assisted\",\n  \"theme\": {\n    \"bg0\": \"#RRGGBB\",\n    \"bg1\": \"#RRGGBB\",\n    \"bg2\": \"#RRGGBB\",\n    \"accent\": \"#RRGGBB\",\n    \"accent2\": \"#RRGGBB\",\n    \"enemy\": \"#RRGGBB\",\n    \"enemy2\": \"#RRGGBB\",\n    \"text\": \"#RRGGBB\",\n    \"muted\": \"#RRGGBB\",\n    \"panel\": \"#RRGGBB\",\n    \"panel2\": \"#RRGGBB\"\n  },\n  \"copy\": {\n    \"title\": \"果冻防线\",\n    \"tagline\": \"4-32 字，含一个具体动作\",\n    \"startCta\": \"2-8 字\",\n    \"hint\": \"4-24 字，必须说明拖拽 + 合成\",\n    \"winTitle\": \"2-10 字\",\n    \"loseTitle\": \"2-10 字\",\n    \"cta\": \"2-8 字\",\n    \"sub\": \"4-32 字\"\n  },\n  \"balance\": {\n    \"duration\": 30,\n    \"baseHp\": 4,\n    \"bossAt\": 23,\n    \"sugarMax\": 100\n  }\n}\n```\n\n硬约束：\n\n- 所有颜色必须是 6 位 hex。\n- `duration` 20–45；`baseHp` 2–5；`bossAt` 必须大于 10 且小于 `duration`；`sugarMax` 60–200。\n- 文案要短、具体、可被 390px 宽度容纳。\n- 视觉必须有明确的明暗层级：背景暗、主体亮、强调色只用于交互。\n- 不要生成品牌名、真实公司名、真实游戏名或任何商标。\n- 不要输出 `storeUrl`、脚本、HTML 或函数。\n\n## 质量检查\n\n在输出前自查：\n\n1. 把 `theme.accent` 放在深色背景上，按钮文字是否仍然可读？\n2. `tagline` 是否包含一个动词？\n3. `winTitle` / `loseTitle` 是否有情绪，而不是“成功/失败”？\n4. 这套配色和默认的薄荷绿是否有明显差异，值得做 A/B？\n\n---\n\n## Brief\n\n夏日落日、橘子汽水，暖色、轻快，适合信息流冷启动\n\n## 额外要求\n\n- id 固定为 \"{{id}}\"。\n- 只返回 JSON。\n- 不要输出代码块标记。",
+  "raw": {
+    "id": "sunset",
+    "label": "日落汽水",
+    "source": "ai-assisted",
+    "theme": {
+      "bg0": "#160b12",
+      "bg1": "#2c1220",
+      "bg2": "#4b2417",
+      "accent": "#ffc857",
+      "accent2": "#ff7a59",
+      "enemy": "#7bddff",
+      "enemy2": "#c2a1ff",
+      "text": "#fff8ec",
+      "muted": "#bea18e",
+      "panel": "#220e13",
+      "panel2": "#3a1a1a"
+    },
+    "copy": {
+      "title": "果冻防线",
+      "tagline": "落日之前，合成最后一道防线。",
+      "startCta": "开始防守",
+      "hint": "拖动同色炮台 → 合成升级",
+      "winTitle": "守到日落！",
+      "loseTitle": "太阳落山了",
+      "cta": "免费下载",
+      "sub": "30 秒 · 单手 · 即点即玩"
+    },
+    "balance": {
+      "duration": 30,
+      "baseHp": 4,
+      "bossAt": 23,
+      "sugarMax": 100
+    }
+  },
+  "normalized": {
+    "id": "sunset",
+    "label": "日落汽水",
+    "source": "ai-assisted",
+    "theme": {
+      "bg0": "#160b12",
+      "bg1": "#2c1220",
+      "bg2": "#4b2417",
+      "accent": "#ffc857",
+      "accent2": "#ff7a59",
+      "enemy": "#7bddff",
+      "enemy2": "#c2a1ff",
+      "text": "#fff8ec",
+      "muted": "#bea18e",
+      "panel": "#220e13",
+      "panel2": "#3a1a1a"
+    },
+    "copy": {
+      "title": "果冻防线",
+      "tagline": "落日之前，合成最后一道防线。",
+      "startCta": "开始防守",
+      "hint": "拖动同色炮台 → 合成升级",
+      "winTitle": "守到日落！",
+      "loseTitle": "太阳落山了",
+      "cta": "免费下载",
+      "sub": "30 秒 · 单手 · 即点即玩"
+    },
+    "balance": {
+      "duration": 30,
+      "baseHp": 4,
+      "bossAt": 23,
+      "sugarMax": 100
+    }
+  },
+  "generatedAt": "2026-10-24T05:45:38.295Z"
+}

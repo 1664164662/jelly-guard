@@ -1,0 +1,25 @@
+{
+  "name": "jelly-guard-playable",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A 30-second H5 playable ad prototype with an AI-assisted variant pipeline.",
+  "scripts": {
+    "gen": "node tools/gen-variants.mjs",
+    "dev": "node tools/gen-variants.mjs && node tools/serve.mjs",
+    "build": "node tools/gen-variants.mjs && node tools/build.mjs",
+    "qa": "node tools/qa.mjs",
+    "test": "node tests/smoke.mjs",
+    "ai:variant": "node tools/ai-variant.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "playable-ad",
+    "h5-game",
+    "canvas",
+    "ai-workflow"
+  ],
+  "license": "MIT"
+}

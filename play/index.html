@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#070a1c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <title>果冻防线 · 30 秒 H5 试玩</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2362F5C5'/%3E%3Cstop offset='1' stop-color='%235AB8FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M10 34C10 18 19 10 32 10s22 8 22 24v10c0 9-9 14-22 14S10 53 10 44z' fill='url(%23g)'/%3E%3Ccircle cx='24' cy='33' r='3' fill='%2308101f'/%3E%3Ccircle cx='40' cy='33' r='3' fill='%2308101f'/%3E%3Cpath d='M26 42q6 5 12 0' fill='none' stroke='%2308101f' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../src/game.css">
+</head>
+<body>
+  <main id="app" aria-label="果冻防线 H5 试玩广告">
+    <canvas id="game" aria-label="合成塔防游戏画面"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div id="flash" class="flash" aria-hidden="true"></div>
+
+    <header id="hud" class="hud is-hidden">
+      <div class="hud__row">
+        <div class="wave-card">
+          <span class="wave-card__kicker">WAVE</span>
+          <b id="wave">1</b><span class="wave-card__total">/ 3</span>
+        </div>
+        <div class="timer" aria-label="剩余时间">
+          <span id="time">30</span><small>SEC</small>
+        </div>
+        <div class="hud__right">
+          <div id="hearts" class="hearts" aria-label="剩余生命"></div>
+          <button id="mute" class="icon-btn" type="button" aria-label="关闭声音" aria-pressed="false">
+            <svg class="icon icon--sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <svg class="icon icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="m16 9 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+    </header>
+
+    <div id="hint" class="hint is-hidden" role="status">
+      <span class="hint__spark" aria-hidden="true">✦</span>
+      <span id="hint-text">拖动同色炮台 → 合成升级</span>
+    </div>
+
+    <div id="bottom-hud" class="bottom-hud is-hidden">
+      <div class="score-box">
+        <span class="score-box__label">SCORE</span>
+        <b id="score">0</b>
+        <span class="score-box__merge">MERGE × <i id="merge-count">0</i></span>
+      </div>
+      <button id="sugar" class="sugar" type="button" aria-label="释放糖爆，伤害全部敌人" aria-disabled="true">
+        <span class="sugar__ring" aria-hidden="true"></span>
+        <span class="sugar__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="m16 3 3.2 8.1 8.8.5-6.8 5.6 2.3 8.5L16 21l-7.5 4.7 2.3-8.5-6.8-5.6 8.8-.5L16 3z" fill="currentColor"/></svg>
+        </span>
+        <span class="sugar__label">糖爆</span>
+        <span class="sugar__pct" id="sugar-pct">0%</span>
+      </button>
+    </div>
+
+    <section id="screen-start" class="screen screen--start" aria-label="开始界面">
+      <div class="start__top">
+        <span class="pill"><i class="pill__dot"></i> PLAYABLE AD · 30S</span>
+        <span class="start__variant" id="variant-label">薄荷实验室</span>
+      </div>
+
+      <div class="start__main">
+        <div class="mascot-wrap" aria-hidden="true">
+          <span class="orbit orbit--one"></span>
+          <span class="orbit orbit--two"></span>
+          <svg class="mascot" viewBox="0 0 160 160">
+            <defs>
+              <linearGradient id="jellyBody" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="var(--accent)"></stop>
+                <stop offset="1" stop-color="#5AB8FF"></stop>
+              </linearGradient>
+              <radialGradient id="jellyShine" cx="0.32" cy="0.22" r="0.5">
+                <stop stop-color="#fff" stop-opacity=".9"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+            <ellipse cx="80" cy="148" rx="43" ry="8" fill="#000" opacity=".3"/>
+            <path d="M55 25 63 9l10 11 7-16 8 16 10-11 7 17z" fill="var(--accent2)" stroke="#0a0b1c" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M22 88c0-40 22-61 58-61s58 21 58 61v24c0 22-22 34-58 34S22 134 22 112z" fill="url(#jellyBody)" stroke="#07101f" stroke-width="2"/>
+            <ellipse cx="60" cy="50" rx="27" ry="17" fill="url(#jellyShine)" transform="rotate(-24 60 50)"/>
+            <ellipse cx="57" cy="91" rx="9" ry="11" fill="#07101f"/>
+            <ellipse cx="103" cy="91" rx="9" ry="11" fill="#07101f"/>
+            <circle cx="60" cy="87" r="3" fill="#fff"/>
+            <circle cx="106" cy="87" r="3" fill="#fff"/>
+            <ellipse cx="44" cy="109" rx="10" ry="5" fill="#FF7A9A" opacity=".6"/>
+            <ellipse cx="116" cy="109" rx="10" ry="5" fill="#FF7A9A" opacity=".6"/>
+            <path d="M70 111q10 9 20 0" fill="none" stroke="#07101f" stroke-width="4" stroke-linecap="round"/>
+            <path d="M24 92c-8 3-12 9-11 16" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/>
+            <path d="M136 92c8 3 12 9 11 16" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/>
+          </svg>
+          <span class="mascot-badge">LV.5</span>
+        </div>
+
+        <p class="start__eyebrow">MERGE DEFENSE · HYBRID CASUAL</p>
+        <h1 class="start__title">果冻<span>防线</span></h1>
+        <p class="start__tagline" id="tagline">合成同色炮台，<br>守住最后一颗糖。</p>
+
+        <div class="start__chips" aria-label="游戏特点">
+          <span>30 秒一局</span><span>单手拖拽</span><span>即点即玩</span>
+        </div>
+
+        <button id="btn-start" class="cta cta--primary" type="button">
+          <span id="start-cta">开始防守</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="start__micro">无需下载 · 单手操作 · 约 30 秒</p>
+      </div>
+
+      <div class="start__foot">
+        <span>DEMO BUILD <i id="build-version">v1.0</i></span>
+        <span id="best-score">BEST 0</span>
+      </div>
+    </section>
+
+    <section id="screen-end" class="screen screen--end is-hidden" aria-label="结算界面" aria-live="polite">
+      <div class="end__card">
+        <div class="end__badge" id="end-badge">VICTORY</div>
+        <h2 class="end__title" id="end-title">防线守住！</h2>
+        <p class="end__sub" id="end-sub">30 秒，一颗糖都没丢。</p>
+
+        <div class="end__stats">
+          <div><span>SCORE</span><b id="end-score">0</b></div>
+          <div><span>MERGE</span><b id="end-merge">0</b></div>
+          <div><span>KILL</span><b id="end-kill">0</b></div>
+        </div>
+
+        <div class="store-row">
+          <div class="store-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M10 34C10 18 19 10 32 10s22 8 22 24v10c0 9-9 14-22 14S10 53 10 44z" fill="var(--accent)"/>
+              <circle cx="24" cy="33" r="3" fill="#08101f"/><circle cx="40" cy="33" r="3" fill="#08101f"/>
+              <path d="M26 42q6 5 12 0" fill="none" stroke="#08101f" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="store-meta">
+            <strong>果冻防线</strong>
+            <span>合成 · 防守 · 一口一个</span>
+            <div class="store-stars"><b>★★★★★</b> <em>4.9</em><small> · 12 万条评价</small></div>
+          </div>
+          <span class="store-free">免费</span>
+        </div>
+
+        <button id="btn-cta" class="cta cta--primary" type="button">
+          <span id="cta-text">免费下载</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-retry" class="cta cta--ghost" type="button">再玩一次</button>
+        <p class="end__note">演示 Demo · 点击仅触发模拟下载桥，不会真实跳转</p>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <div id="debug" class="debug is-hidden" aria-hidden="true">
+      <span>FPS <b id="dbg-fps">60</b></span>
+      <span>ENT <b id="dbg-ent">0</b></span>
+      <span>DPR <b id="dbg-dpr">2</b></span>
+      <span>Q <b id="dbg-quality">HIGH</b></span>
+    </div>
+  </main>
+
+  <script src="../src/generated-variants.js"></script>
+  <script src="../src/game.js"></script>
+</body>
+</html>

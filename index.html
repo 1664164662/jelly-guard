@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="果冻防线：一个为「AI 试玩 / H5 游戏开发」岗位制作的 30 秒 H5 试玩广告 Demo，包含 AI 变体生产、单文件构建、性能预算与自动化 QA。">
+  <meta name="theme-color" content="#07080c">
+  <title>罗迪 · 果冻防线 | 30 秒 H5 试玩广告作品</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M10 34C10 18 19 10 32 10s22 8 22 24v10c0 9-9 14-22 14S10 53 10 44z' fill='%2362F5C5'/%3E%3Ccircle cx='24' cy='33' r='3' fill='%2308101f'/%3E%3Ccircle cx='40' cy='33' r='3' fill='%2308101f'/%3E%3Cpath d='M26 42q6 5 12 0' fill='none' stroke='%2308101f' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="src/landing.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="罗迪作品集首页">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">LUO DI</span>
+        <span class="brand__slash">/</span>
+        <span class="brand__lab">PLAYABLE LAB</span>
+      </a>
+      <nav class="nav__links" aria-label="页面导航">
+        <a href="#demo">试玩</a>
+        <a href="#why">为什么</a>
+        <a href="#process">制作拆解</a>
+        <a href="#ai">AI 工作流</a>
+        <a href="#qa">工程与 QA</a>
+      </nav>
+      <a class="nav__cta" href="play/?variant=mint&amp;quality=high" target="_blank" rel="noopener">
+        全屏试玩 <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy reveal">
+          <p class="eyebrow"><span class="pulse-dot"></span> CASE STUDY 01 <span class="eyebrow__sep">/</span> 2026 · 武汉</p>
+          <h1 class="hero__title">
+            把 30 秒，<br>
+            做成让人<span class="mark">想点下载</span><br>
+            的 30 秒。
+          </h1>
+          <p class="lead">
+            《果冻防线》是一个为 <strong>AI 试玩 / H5 游戏开发</strong> 岗位制作的试玩广告 Demo：
+            把「合成塔防」的爽点压缩进 30 秒，并把 AI 变体生成、单文件构建、埋点与自动化 QA
+            串成一条能重复跑的生产链路。
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#demo">
+              先玩一局
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
+            </a>
+            <a class="text-link" href="#process">看制作拆解 <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="hero__stage" id="demo">
+          <div class="phone-wrap">
+            <div class="phone">
+              <div class="phone__bezel">
+                <span class="phone__speaker" aria-hidden="true"></span>
+                <span class="phone__camera" aria-hidden="true"></span>
+              </div>
+              <iframe
+                id="game-frame"
+                class="phone__screen"
+                title="果冻防线 30 秒试玩 Demo"
+                src="play/?variant=mint&amp;quality=high"
+                allow="autoplay; fullscreen"
+                loading="eager"
+              ></iframe>
+              <div class="phone__home" aria-hidden="true"></div>
+            </div>
+            <div class="phone__label"><span class="live-dot"></span> LIVE DEMO <span class="phone__hint">建议声音开启</span></div>
+          </div>
+
+          <aside class="stage-aside">
+            <div class="telemetry">
+              <div class="telemetry__head">
+                <span><i class="live-dot"></i> LIVE TELEMETRY</span>
+                <span id="live-fps">60 FPS</span>
+              </div>
+              <div class="telemetry__log" id="event-log" aria-live="polite">
+                <div class="log-line log-line--muted"><span class="log-t">00:00</span><span class="log-evt">playable ready</span></div>
+                <div class="log-line log-line--muted"><span class="log-t">TIP</span><span class="log-evt">拖拽同色炮台合成</span></div>
+              </div>
+              <div class="telemetry__foot">
+                <span>postMessage</span>
+                <span id="live-variant">VARIANT / MINT</span>
+              </div>
+            </div>
+
+            <div class="variants">
+              <div class="variants__head">
+                <span>VARIANTS</span>
+                <span class="variants__note">A/B READY</span>
+              </div>
+              <div class="variant-tabs" role="group" aria-label="切换试玩变体">
+                <button class="variant-tab is-active" type="button" data-variant="mint" aria-pressed="true">
+                  <i style="--swatch:#62f5c5"></i>薄荷
+                </button>
+                <button class="variant-tab" type="button" data-variant="berry" aria-pressed="false">
+                  <i style="--swatch:#ff8db6"></i>莓果
+                </button>
+                <button class="variant-tab" type="button" data-variant="sunset" aria-pressed="false">
+                  <i style="--swatch:#ffc857"></i>日落
+                </button>
+              </div>
+              <p class="variants__desc" id="variant-desc">薄荷实验室：冷色霓虹，突出「合成升级」的清爽反馈。</p>
+              <a class="variants__link" id="variant-open" href="play/?variant=mint&amp;quality=high" target="_blank" rel="noopener">单独打开这个变体 ↗</a>
+            </div>
+
+            <div class="build-card">
+              <div class="build-card__head">
+                <span>BUILD SNAPSHOT</span>
+                <span class="build-card__ok">PASS</span>
+              </div>
+              <div class="build-card__rows">
+                <div><span>SINGLE FILE</span><b id="aside-size">119.6 KB</b></div>
+                <div><span>GZIP</span><b id="aside-gzip">31.0 KB</b></div>
+                <div><span>SMOKE</span><b>5 / 5</b></div>
+                <div><span>RUNTIME DEPS</span><b>0</b></div>
+              </div>
+            </div>
+
+            <p class="stage-note">桌面端可直接鼠标拖拽；点击 CTA 只触发模拟下载桥，不会真实跳转。</p>
+          </aside>
+        </div>
+
+        <dl class="hero__stats">
+          <div><dt>30<span>s</span></dt><dd>教学 → 合成 → Boss → End Card</dd></div>
+          <div><dt id="size-stat">120<span>KB</span></dt><dd>单文件 · 0 外部请求</dd></div>
+          <div><dt>60<span>fps</span></dt><dd>目标帧率 · DPR 自适应</dd></div>
+          <div><dt>9<span>+</span></dt><dd>关键行为埋点</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>MERGE</span><b>✳</b><span>DEFEND</span><b>✳</b><span>CONVERT</span><b>✳</b><span>30 SECONDS</span><b>✳</b><span>ONE THUMB</span><b>✳</b>
+        <span>MERGE</span><b>✳</b><span>DEFEND</span><b>✳</b><span>CONVERT</span><b>✳</b><span>30 SECONDS</span><b>✳</b><span>ONE THUMB</span><b>✳</b>
+      </div>
+    </div>
+
+    <section class="section" id="why">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">01 / WHY THIS LOOP</p>
+          <h2>为什么是「合成 + 塔防」？</h2>
+          <p class="section-head__lead">
+            试玩广告的第一竞争对手不是别的游戏，是用户的拇指。这个组合把「看懂规则」和「获得反馈」都压到了一次拖拽里，
+            同时天然适合做 15–30 秒的高潮曲线。
+          </p>
+        </header>
+
+        <div class="reason-grid">
+          <article class="reason reveal">
+            <span class="reason__no">01</span>
+            <h3>3 秒能看懂</h3>
+            <p>同色炮台、拖到一起、变强。没有文字教程也能靠高亮和一次自动引导完成第一次合成。</p>
+            <span class="reason__tag">COGNITIVE LOAD</span>
+          </article>
+          <article class="reason reveal">
+            <span class="reason__no">02</span>
+            <h3>反馈密度高</h3>
+            <p>每次合并都有音效、粒子、光环、数字跳变和屏幕轻震；30 秒内能完成 4 次明确的成长。</p>
+            <span class="reason__tag">GAME FEEL</span>
+          </article>
+          <article class="reason reveal">
+            <span class="reason__no">03</span>
+            <h3>单手可完成</h3>
+            <p>拖拽是唯一核心操作，糖爆是唯一主动技能。没有摇杆、没有多指操作，适合信息流场景。</p>
+            <span class="reason__tag">ONE THUMB</span>
+          </article>
+          <article class="reason reveal">
+            <span class="reason__no">04</span>
+            <h3>可拆成变体</h3>
+            <p>主题、文案、难度、Boss 时间点都能参数化。同一套引擎可以快速产出不同素材做 A/B。</p>
+            <span class="reason__tag">SCALE</span>
+          </article>
+        </div>
+
+        <blockquote class="pull-quote reveal">
+          <p>“试玩广告不是把游戏做小，<br>是把「想继续玩」压缩进几十秒。”</p>
+          <cite>— 项目设计原则</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">02 / 30-SECOND ARC</p>
+          <h2>一条为“划走”设计的节奏线</h2>
+          <p class="section-head__lead">
+            每个时间段只回答一个问题：现在要做什么？做完会怎样？下一波还有什么？
+          </p>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <span class="timeline__time">00–03s</span>
+            <div class="timeline__dot"></div>
+            <h3>先给情绪，再给规则</h3>
+            <p>果冻吉祥物 + 一句话卖点 + 大按钮。点击后 0 延迟进入战场，不插入加载页。</p>
+            <span class="timeline__artifact">START SCREEN</span>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__time">03–10s</span>
+            <div class="timeline__dot"></div>
+            <h3>一次拖拽完成教学</h3>
+            <p>虚线路径 + 同色高亮 + 光标提示。若约 6 秒仍没有完成合成，系统会自动完成第一次，保证体验不断线。</p>
+            <span class="timeline__artifact">TUTORIAL + IDLE ASSIST</span>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__time">10–22s</span>
+            <div class="timeline__dot"></div>
+            <h3>压力与补给交替</h3>
+            <p>第 2 波加速怪、第 3 波铁甲怪；三个时间点空投新炮台，让玩家在“继续合”与“补覆盖”之间做选择。</p>
+            <span class="timeline__artifact">WAVE 2–3 + SUPPLY</span>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__time">22–30s</span>
+            <div class="timeline__dot"></div>
+            <h3>Boss 把情绪拉到顶</h3>
+            <p>Boss 入场震屏 + 血条 + 狂暴提示；攒满的「糖爆」成为玩家的高潮按钮，清场后进入结算。</p>
+            <span class="timeline__artifact">BOSS + SUGAR BURST</span>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__time">END</span>
+            <div class="timeline__dot"></div>
+            <h3>结果页只做一件事</h3>
+            <p>分数、合并数、击杀数建立成就感；应用卡 + 评分 + 免费下载按钮完成转化，同时保留“再玩一次”。</p>
+            <span class="timeline__artifact">END CARD + CTA</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="craft">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">03 / WHAT I BUILT</p>
+          <h2>三个岗位关键词，三组可验收的产出</h2>
+          <p class="section-head__lead">
+            没有把“参与过”写成“负责过”。下面每一条都能在 Demo、代码或文档里找到对应物。
+          </p>
+        </header>
+
+        <div class="capability-grid">
+          <article class="capability reveal">
+            <div class="capability__top"><span class="capability__no">A</span><span>PLAYABLE DESIGN</span></div>
+            <h3>试玩广告制作</h3>
+            <ul>
+              <li>30 秒完整闭环：Hook → 教学 → 波次 → Boss → End Card。</li>
+              <li>合成 / 糖爆 / 空投三种反馈节奏，覆盖“看、拖、点”三类交互。</li>
+              <li>3 套主题与文案变体，query 参数即可切换，方便 A/B。</li>
+              <li>MRAID / Google ExitApi / TikTok playableSDK 下载桥预留。</li>
+            </ul>
+            <a href="play/?variant=berry&amp;quality=high" target="_blank" rel="noopener" class="capability__link">打开莓果变体 ↗</a>
+          </article>
+
+          <article class="capability reveal">
+            <div class="capability__top"><span class="capability__no">B</span><span>H5 ENGINEERING</span></div>
+            <h3>H5 开发与性能</h3>
+            <ul>
+              <li>Vanilla JS + Canvas 2D，运行时零依赖、零图片、零字体请求。</li>
+              <li>精灵预渲染、粒子池、固定时间步、DPR 上限与低帧率降级。</li>
+              <li>页面隐藏自动暂停；单文件构建，可直接投放或塞进 iframe。</li>
+              <li>Chrome CDP 自动化冒烟：开始、拖拽合成、糖爆、胜负、CTA。</li>
+            </ul>
+            <a href="#qa" class="capability__link">看性能预算与测试 ↓</a>
+          </article>
+
+          <article class="capability reveal">
+            <div class="capability__top"><span class="capability__no">C</span><span>AI PIPELINE</span></div>
+            <h3>AI 变体工作流</h3>
+            <ul>
+              <li>用 JSON Schema 约束 LLM 输出主题、文案、难度参数，不让模型碰核心逻辑。</li>
+              <li>Node 脚本完成校验、失败回退、生成浏览器配置，再接单文件构建。</li>
+              <li>提示词库覆盖概念、文案、QA 清单；每次运行留下 prompt / response 记录。</li>
+              <li>已产出「日落汽水」AI 辅助变体，和手工变体一起进入 A/B 池。</li>
+            </ul>
+            <a href="#ai" class="capability__link">看 AI 流水线 ↓</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ai">
+      <div class="wrap ai-grid">
+        <div class="ai-copy reveal">
+          <p class="eyebrow">04 / AI, NOT DECORATION</p>
+          <h2>AI 不是噱头，<br>是流水线上的一个工位。</h2>
+          <p class="lead">
+            这个项目里，LLM 不直接写游戏逻辑。它只做最擅长的部分：根据 brief 产出主题、文案和难度参数；
+            代码负责结构校验、边界约束、回退和构建。这样既能快速试错，又不会把不可控输出带进投放素材。
+          </p>
+
+          <ol class="pipeline">
+            <li><span>01</span><div><strong>BRIEF</strong><p>一句主题描述 + 目标人群 + 约束（时长、Boss 时间、文案长度）。</p></div></li>
+            <li><span>02</span><div><strong>LLM → JSON</strong><p>DeepSeek / OpenAI-compatible API，要求只返回符合 schema 的 JSON。</p></div></li>
+            <li><span>03</span><div><strong>VALIDATE / FALLBACK</strong><p>校验颜色、字数、数值区间；失败自动使用本地模板，不让构建中断。</p></div></li>
+            <li><span>04</span><div><strong>BUILD</strong><p>生成浏览器配置 → 单文件试玩 → 尺寸 / gzip / 外部请求断言。</p></div></li>
+          </ol>
+
+          <div class="ai-note">
+            <span class="ai-note__icon">✳</span>
+            <p><strong>真实边界：</strong>这是个人求职 Demo，不是冰川网络官方项目，也没有真实投放数据。所有“效果”都是工程指标和可复现的交互，不编造 CTR / IPM。</p>
+          </div>
+        </div>
+
+        <div class="code-panel reveal">
+          <div class="code-panel__bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span>tools/ai-variant.mjs</span>
+            <span class="code-panel__tag">SCHEMA-GUARDED</span>
+          </div>
+          <pre class="code"><code><span class="c-comment">// 1. brief → structured variant</span>
+<span class="c-key">const</span> variant = <span class="c-key">await</span> generateVariant({
+  brief: <span class="c-str">"夏日柠檬气泡，清爽、轻快"</span>,
+  schema: {
+    id: <span class="c-str">"slug"</span>,
+    theme: { accent: <span class="c-str">"#RRGGBB"</span>, ... },
+    copy: { tagline: { max: <span class="c-num">32</span> }, ... },
+    balance: { duration: <span class="c-num">30</span>, bossAt: <span class="c-num">23</span> }
+  }
+});
+
+<span class="c-comment">// 2. validation is the contract</span>
+validateVariant(variant);
+<span class="c-comment">// 3. never block the build</span>
+<span class="c-key">if</span> (!valid) variant = fallbackFromBrief(brief);
+
+<span class="c-comment">// 4. ship a single file</span>
+<span class="c-key">await</span> buildPlayable(variant);</code></pre>
+          <div class="code-panel__foot">
+            <span><i class="live-dot"></i> prompt + response 留档</span>
+            <span>fallback: local recipe</span>
+          </div>
+          <div class="terminal">
+            <div><span class="t-prompt">$</span> node tools/ai-variant.mjs --brief <span class="t-str">"夏日柠檬气泡"</span> --id lemon</div>
+            <div class="t-ok">✓ schema validated · 12 theme tokens · 8 copy fields</div>
+            <div class="t-ok">✓ variants/lemon.json written</div>
+            <div class="t-ok">✓ src/generated-variants.js refreshed</div>
+            <div class="t-dim"># API 不可用时走 local recipe，产物结构完全一致</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="qa">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">05 / SHIP IT, THEN PROVE IT</p>
+          <h2>性能预算与踩坑记录</h2>
+          <p class="section-head__lead">
+            这部分不是“优化了性能”的口号，而是可以复现的数字和三个真实修过的 bug。
+            测试环境：Chrome 155 Headless，390 × 844，DPR 2，Windows。
+          </p>
+        </header>
+
+        <div class="qa-grid">
+          <div class="budget reveal">
+            <div class="budget__head">
+              <span>PLAYABLE BUDGET</span>
+              <span class="budget__status">PASS</span>
+            </div>
+            <dl class="budget__list">
+              <div><dt>单文件（raw）</dt><dd id="budget-size">119.6 KB</dd><span>预算 ≤ 150 KB</span></div>
+              <div><dt>单文件（gzip）</dt><dd id="budget-gzip">31.0 KB</dd><span>预算 ≤ 50 KB</span></div>
+              <div><dt>外部请求</dt><dd>0</dd><span>无 CDN / 图片 / 字体</span></div>
+              <div><dt>Canvas 层数</dt><dd>1</dd><span>背景预渲染</span></div>
+              <div><dt>桌面 headless FPS</dt><dd>60</dd><span>峰值特效时 ~48–60</span></div>
+              <div><dt>自动化冒烟</dt><dd>5 / 5</dd><span>开始 · 合成 · 糖爆 · 重开/胜负 · CTA</span></div>
+            </dl>
+            <div class="budget__bar" aria-hidden="true"><i style="width:62%"></i></div>
+            <p class="budget__note">数字来自本地构建和 Chrome CDP 测试，不代表真实投放环境；移动端会再按 DPR 与帧率降级。</p>
+          </div>
+
+          <div class="bugs">
+            <article class="bug reveal">
+              <div class="bug__top"><span>BUG 01</span><span class="bug__fixed">FIXED</span></div>
+              <h3>全合成后，只剩一座炮台</h3>
+              <p>最初炮台只打自己这一列，玩家把资源全部合成到 Lv.5 后，其他列直接失守。</p>
+              <div class="bug__fix"><b>修复</b>同轨优先 + 跨轨兜底索敌；高等级炮台可以转火，但同轨仍优先。</div>
+            </article>
+            <article class="bug reveal">
+              <div class="bug__top"><span>BUG 02</span><span class="bug__fixed">FIXED</span></div>
+              <h3>结算后帧率掉到 20</h3>
+              <p>End Card 的 <code>backdrop-filter</code> 叠在持续重绘的 Canvas 上，每次合成都要重新模糊整屏。</p>
+              <div class="bug__fix"><b>修复</b>结算时停掉 Canvas 渲染并切换静态渐变背景，帧率恢复，视觉也更干净。</div>
+            </article>
+            <article class="bug reveal">
+              <div class="bug__top"><span>BUG 03</span><span class="bug__fixed">FIXED</span></div>
+              <h3>新手不知道拖哪里</h3>
+              <p>第一版只有文字提示，首次合并平均发生在 12 秒之后，前半段几乎没有成长反馈。</p>
+              <div class="bug__fix"><b>修复</b>路径虚线 + 同色槽高亮 + 约 6 秒仍无合成时自动完成第一次；主动操作可在 2–4 秒内完成首合。</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--about" id="about">
+      <div class="wrap about-grid">
+        <div class="about-copy reveal">
+          <p class="eyebrow">06 / ABOUT</p>
+          <h2>我不是把 AI 当快捷键，<br>而是把它放进流水线。</h2>
+          <p>
+            我是罗迪，计算机科学与技术本科（2026 届），有 2 年+ 电商运营、内容生产与数据分析经验。
+            我熟悉“素材 → 投放 → 数据 → 迭代”的真实业务链路，也能把 AI 工作流、前端实现和验收标准串起来。
+          </p>
+          <p>
+            这个项目是我对「AI 试玩」岗位的一次完整回答：既做得出 30 秒的体验，也说得清它怎么被批量生产、怎么被测试、怎么被衡量。
+          </p>
+          <div class="about__facts">
+            <span>武汉</span><span>计算机本科 · 2026</span><span>AI 应用 / 内容流水线</span><span>可立即到岗</span>
+          </div>
+        </div>
+        <div class="contact-card reveal">
+          <p class="contact-card__label">LET'S TALK</p>
+          <a class="contact-card__mail" href="mailto:1664164662@qq.com">1664164662@qq.com</a>
+          <p class="contact-card__hint">邮件请附岗位 / 团队，我会在 24 小时内回复。</p>
+          <div class="contact-card__actions">
+            <a class="btn btn--primary" href="play/?variant=mint&amp;quality=high" target="_blank" rel="noopener">打开可玩 Demo ↗</a>
+            <a class="text-link" href="docs/罗迪-果冻防线-项目一页纸.pdf" download>项目一页纸 PDF ↓</a>
+            <a class="text-link" href="#top">回到顶部 ↑</a>
+          </div>
+          <p class="contact-card__disclaimer">
+            个人求职作品 · 与冰川网络无隶属关系 · 游戏、评分、下载按钮均为虚构演示素材。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>© 2026 罗迪 · PLAYABLE LAB</span>
+      <span>VANILLA JS / CANVAS / NODE · 0 RUNTIME DEPS</span>
+      <span>DESIGNED FOR 30 SECONDS</span>
+    </div>
+  </footer>
+
+  <script src="src/landing.js"></script>
+</body>
+</html>

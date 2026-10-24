@@ -1,0 +1,34 @@
+{
+  "id": "mint",
+  "label": "薄荷实验室",
+  "source": "handcrafted",
+  "theme": {
+    "bg0": "#070A1C",
+    "bg1": "#11143A",
+    "bg2": "#241255",
+    "accent": "#62F5C5",
+    "accent2": "#FFD166",
+    "enemy": "#FF6B8A",
+    "enemy2": "#B78CFF",
+    "text": "#F3FFF9",
+    "muted": "#8E9BB8",
+    "panel": "#100D2B",
+    "panel2": "#1B1542"
+  },
+  "copy": {
+    "title": "果冻防线",
+    "tagline": "合成同色炮台，守住最后一颗糖。",
+    "startCta": "开始防守",
+    "hint": "拖动同色炮台 → 合成升级",
+    "winTitle": "防线守住！",
+    "loseTitle": "就差一点点",
+    "cta": "免费下载",
+    "sub": "30 秒 · 单手 · 即点即玩"
+  },
+  "balance": {
+    "duration": 30,
+    "baseHp": 4,
+    "bossAt": 23,
+    "sugarMax": 100
+  }
+}

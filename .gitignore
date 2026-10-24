@@ -1,0 +1,9 @@
+# local preview / browser profiles / test output
+.tmp/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+
+# OS artifacts
+desktop.ini
