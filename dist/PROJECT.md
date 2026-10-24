@@ -3,6 +3,10 @@
 > 一个为「AI 试玩 / H5 游戏开发」岗位准备的 30 秒 H5 试玩广告 Demo。  
 > 不只是小游戏：包含 AI 变体生产、单文件构建、埋点、自动化 QA 和一套可复用的试玩 SOP。
 
+**在线作品集**：https://1664164662.github.io/jelly-guard/  
+**在线试玩**：https://1664164662.github.io/jelly-guard/play/  
+**源码**：https://github.com/1664164662/jelly-guard
+
 ![果冻防线试玩截图](assets/showcase/boss.png)
 
 **当前构建**：`v1.0.0+7d102d65` ｜ 单文件 **119.6 KB** ｜ gzip **31.0 KB** ｜ 运行时依赖 **0** ｜ 外部请求 **0** ｜ 冒烟测试 **5/5**

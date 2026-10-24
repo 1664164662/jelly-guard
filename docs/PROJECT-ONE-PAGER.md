@@ -54,10 +54,10 @@ Hook    →   教学 / 首合    →   波次 / 空投    →   Boss / 糖爆   
 
 ## 链接
 
-- 可玩 Demo：`<部署后填写>`
-- 作品集：`<部署后填写>`
-- 源码：`<GitHub / Gitee 链接>`
-- 构建报告：`<部署后填写>/build-report.json`
+- 可玩 Demo：<https://1664164662.github.io/jelly-guard/>
+- 作品集：<https://1664164662.github.io/jelly-guard/>
+- 源码：<https://github.com/1664164662/jelly-guard>
+- 构建报告：<https://1664164662.github.io/jelly-guard/build-report.json>
 
 ---
 
